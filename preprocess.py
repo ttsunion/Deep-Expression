@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# #/usr/bin/python3
+# fangshuming519@gmail.com
+# /usr/bin/python3
 import os
 import wave
 import numpy as np
