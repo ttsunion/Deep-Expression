@@ -11,4 +11,8 @@ In previous frameworks, people tended to normalized wave data, and may eventuall
 
 This project is under development...............
 
+# Step1
+python preprocess.py
 
+# Step2
+python train.py
