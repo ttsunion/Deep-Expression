@@ -21,6 +21,7 @@ def get_wav(sound_file):
         wave_data = wave_data[:pm.sr * pm.max_duration]
     else:
         wave_data = np.concatenate((wave_data, np.array([0] * (int(pm.sr * pm.max_duration) - len(wave_data)))))
+    wave_data = wave_data.reshape(pm.Dy, pm.Ty)
     return wave_data	
 
 if __name__ == "__main__":
