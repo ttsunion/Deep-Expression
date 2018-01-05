@@ -42,10 +42,9 @@ net = tf.matmul(net, w2)
 net = tf.reshape(net, [-1, pm.Dy, pm.num_units])
 net = tf.nn.relu(net)
 net = normalize(net)
-net = tf.reshape(net, [-1, pm.Dy * pm.num_units])
-w3 = tf.truncated_normal((pm.Dy * pm.num_units, int(pm.sr * pm.max_duration)), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w3')
-net = tf.matmul(net, w3)
-net = tf.reshape(net, [-1, pm.Dy, pm.Ty])
+w3 = tf.truncated_normal((pm.num_units, pm.Ty), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w3')
+net = [tf.matmul(net[i, :, :], w3) for i in range(pm.batch_size)]
+yhat = tf.stack(net)
 loss = tf.reduce_mean(tf.abs(y - net), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
