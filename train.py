@@ -36,13 +36,13 @@ net = tf.matmul(Q, tf.transpose(K, [0, 2, 1]))
 net = tf.matmul(net, V)
 net += x_embed
 net = normalize(net)
-w2 = tf.tile(tf.truncated_normal((1, pm.Dy * pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.Tx * pm.num_units, 1], name = 'w2')
-net = tf.reshape(net, [-1, pm.Tx * pm.num_units])
-net = tf.matmul(net, w2)
-net = tf.reshape(net, [-1, pm.Dy, pm.num_units])
+w2 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
+net = [tf.matmul(net[i, :, :], w2) for i in range(pm.batch_size)]
+net = tf.stack(net)
 net = tf.nn.relu(net)
 net = normalize(net)
-w3 = tf.truncated_normal((pm.num_units, pm.Ty), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w3')
+net = tf.transpose(net, [0, 2, 1])
+w3 = tf.truncated_normal((pm.Tx, pm.Ty), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w3')
 net = [tf.matmul(net[i, :, :], w3) for i in range(pm.batch_size)]
 yhat = tf.stack(net)
 loss = tf.reduce_mean(tf.abs(y - net), name = 'loss')
