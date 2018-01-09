@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import os
+import wave
 from text import *
 from parameters import params as pm
 
@@ -69,6 +70,17 @@ loss = tf.reduce_mean(tf.abs(y - net), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(10000):
-        result = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
+    for i in range(2000):
+        _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
         print('loss:	', sess.run(loss, feed_dict = {x:labels, y:wavs}))
+        if i % 100 == 0:
+            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**10
+            ypred = ypred[0, :, :]
+            ypred = ypred.reshape(int(pm.sr * pm.max_duration), 1)
+            ypred = ypred.astype(int)
+            fi = wave.open(r"test.wav", "wb")
+            fi.setnchannels(1)
+            fi.setsampwidth(2)
+            fi.setframerate(24000)
+            fi.writeframes(ypred.tostring())
+            fi.close()
