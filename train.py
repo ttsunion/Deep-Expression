@@ -74,7 +74,7 @@ with tf.Session() as sess:
         _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
         print('loss:	', sess.run(loss, feed_dict = {x:labels, y:wavs}))
         if i % 100 == 0:
-            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**15
+            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**10
             ypred = ypred[0, :, :]
             ypred = ypred.reshape(int(pm.sr * pm.max_duration), 1)
             fi = wave.open(r"test.wav", "wb")
