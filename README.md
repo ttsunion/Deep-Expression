@@ -18,4 +18,4 @@ python preprocess.py
 python train.py
 
 # Progress
-The code should work now, after enough training, loss can reach enough lower value (from ~2.3 to ~0.01). Besides, signals is transformed to locating in the range of (-1, 1) by dividing 2**15. Next step, is to write scipts for wave synthesis from transformed signals.
+The code should work now, after enough training, loss can reach enough lower value (from ~2.3 to ~0.01). Besides, signals is transformed in order to locating in the range of (-1, 1) by dividing 2**15. Next step, is to write scipts for wave synthesis from transformed signals.
