@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import os
+import wave
 from text import *
 from parameters import params as pm
 
@@ -18,8 +19,8 @@ def feed_forward(inputs, w):
     outputs = [tf.matmul(inputs[i, :, :], w) for i in range(pm.batch_size)]
     outputs = tf.stack(outputs)
     outputs = tf.nn.relu(outputs)
-    outputs += inputs
     return outputs
+
 labels = []
 with open('samples/labels/labels.txt', 'r', encoding = 'utf-8') as lb:
     for l in lb.readlines():
@@ -41,11 +42,11 @@ net = tf.matmul(Q, tf.transpose(K, [0, 2, 1]))
 net = tf.matmul(net, V)
 net += x_embed
 net = normalize(net)
-w2 = tf.truncated_normal((pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w2')
-w3 = tf.truncated_normal((pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w3')
-w4 = tf.truncated_normal((pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w4')
-w5 = tf.truncated_normal((pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w5')
-w6 = tf.truncated_normal((pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w6')
+w2 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
+w3 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w3')
+w4 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w4')
+w5 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w5')
+w6 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w6')
 net = feed_forward(net, w2)
 net = normalize(net)
 net = feed_forward(net, w3)
@@ -56,7 +57,7 @@ net = feed_forward(net, w5)
 net = normalize(net)
 net = feed_forward(net, w6)
 net = normalize(net)
-w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
+w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w7')
 net = [tf.matmul(net[i, :, :], w7) for i in range(pm.batch_size)]
 net = tf.stack(net)
 net = tf.nn.relu(net)
@@ -69,6 +70,16 @@ loss = tf.reduce_mean(tf.abs(y - net), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(10000):
-        result = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
+    for i in range(2000):
+        _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
         print('loss:	', sess.run(loss, feed_dict = {x:labels, y:wavs}))
+        if i % 100 == 0:
+            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**15
+            ypred = ypred[0, :, :]
+            ypred = ypred.reshape(int(pm.sr * pm.max_duration), 1)
+            fi = wave.open(r"test.wav", "wb")
+            fi.setnchannels(1)
+            fi.setsampwidth(2)
+            fi.setframerate(pm.sr)
+            fi.writeframes(ypred.tostring())
+            fi.close()
