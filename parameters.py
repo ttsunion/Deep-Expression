@@ -13,6 +13,7 @@ class params:
     Ty = int(sr * frame_length) # signals. maximum length  of signal.
     Dy = int(sr * max_duration/Ty) 
     # training scheme
-    lr = 0.001
+    lr = 0.005
     batch_size = 4
+    num_units = 512
     logdir = "logdir"
