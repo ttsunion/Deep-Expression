@@ -16,7 +16,7 @@ def get_wav(sound_file):
     #close the stream  
     w.close() 
     #turn the wave's data to array  
-    wave_data = np.fromstring(str_data, dtype = np.short)
+    wave_data = np.fromstring(str_data, dtype = np.short)/2**15
     if len(wave_data)>= pm.sr * pm.max_duration:
         wave_data = wave_data[:pm.sr * pm.max_duration]
     else:
@@ -27,9 +27,6 @@ def get_wav(sound_file):
 if __name__ == "__main__":
     wav_folder = os.path.join('samples', 'wavs')
     wav_processed_folder  = os.path.join('processed', 'wavs')
-    
-    #label processing
-    
     #audio processing
     files = os.listdir(wav_folder)
     for f in files:
