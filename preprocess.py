@@ -2,21 +2,13 @@
 # fangshuming519@gmail.com
 # /usr/bin/python3
 import os
-import wave
+from scipy.io import wavfile
 import numpy as np
 from parameters import params as pm
 
 def get_wav(sound_file):
-    w = wave.open(os.path.join(wav_folder, sound_file),"rb")
-    params = w.getparams()  
-    #get the info  
-    nchannels, sampwidth, framerate, nframes = params[:4]  
-    #Reads and returns nframes of audio, as a string of bytes.   
-    str_data = w.readframes(nframes)  
-    #close the stream  
-    w.close() 
-    #turn the wave's data to array  
-    wave_data = np.fromstring(str_data, dtype = np.short)/2**10
+    sr, wave_data  = wavfile.read(os.path.join(wav_folder, sound_file), mmap=False)
+    wave_data = np.array(wave_data)/2**10
     if len(wave_data)>= pm.sr * pm.max_duration:
         wave_data = wave_data[:pm.sr * pm.max_duration]
     else:
