@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import os
-import wave
+from scipy.io import wavfile
 from text import *
 from parameters import params as pm
 
@@ -21,6 +21,24 @@ def feed_forward(inputs, w):
     outputs = tf.nn.relu(outputs)
     return outputs
 
+def positional_encoding(inputs,
+                        num_units):
+
+    N, T = inputs.get_shape().as_list()
+    position_ind = tf.tile(tf.expand_dims(tf.range(T), 0), [N, 1])
+
+    # First part of the PE function: sin and cos argument
+    position_enc = np.array([
+            [pos / np.power(10000, 2.*i/num_units) for i in range(num_units)]
+            for pos in range(T)])
+    # Second part, apply the cosine to even columns and sin to odds.
+    position_enc[:, 0::2] = np.sin(position_enc[:, 0::2])  # dim 2i
+    position_enc[:, 1::2] = np.cos(position_enc[:, 1::2])  # dim 2i+1
+    # Convert to a tensor
+    lookup_table = tf.convert_to_tensor(position_enc, dtype = tf.float32)
+    outputs = tf.nn.embedding_lookup(lookup_table, position_ind)
+    return outputs
+
 labels = []
 with open('samples/labels/labels.txt', 'r', encoding = 'utf-8') as lb:
     for l in lb.readlines():
@@ -34,6 +52,7 @@ x = tf.placeholder("int32", [pm.batch_size, pm.Tx], name = "x")
 y = tf.placeholder("float32", [pm.batch_size, pm.Dy, pm.Ty], name = "y")
 lookup_table = tf.Variable(tf.random_uniform((pm.vocab_size, pm.num_units), minval=-0.5, maxval=0.5,dtype=tf.float32), name = 'lookup_table')
 x_embed = tf.nn.embedding_lookup(lookup_table, x, name = 'x_embed')
+x_embed += positional_encoding(x, pm.num_units)
 w1 = tf.truncated_normal((3, pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name='w1')
 Q = tf.nn.relu(tf.scan(lambda a, x: tf.matmul(x, w1[0, :, :]), x_embed), name = 'Q')
 K = tf.nn.relu(tf.scan(lambda a, x: tf.matmul(x, w1[1, :, :]), x_embed), name = 'K')
@@ -42,11 +61,11 @@ net = tf.matmul(Q, tf.transpose(K, [0, 2, 1]))
 net = tf.matmul(net, V)
 net += x_embed
 net = normalize(net)
-w2 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
-w3 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w3')
-w4 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w4')
-w5 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w5')
-w6 = tf.tile(tf.truncated_normal((1, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w6')
+w2 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
+w3 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w3')
+w4 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w4')
+w5 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w5')
+w6 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w6')
 net = feed_forward(net, w2)
 net = normalize(net)
 net = feed_forward(net, w3)
@@ -57,7 +76,7 @@ net = feed_forward(net, w5)
 net = normalize(net)
 net = feed_forward(net, w6)
 net = normalize(net)
-w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w7')
+w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w7')
 net = [tf.matmul(net[i, :, :], w7) for i in range(pm.batch_size)]
 net = tf.stack(net)
 net = tf.nn.relu(net)
@@ -77,9 +96,4 @@ with tf.Session() as sess:
             ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**10
             ypred = ypred[0, :, :]
             ypred = ypred.reshape(int(pm.sr * pm.max_duration), 1)
-            fi = wave.open(r"test.wav", "wb")
-            fi.setnchannels(1)
-            fi.setsampwidth(2)
-            fi.setframerate(pm.sr)
-            fi.writeframes(ypred.tostring())
-            fi.close()
+            wavfile.write('output.wav', pm.sr, ypred)
