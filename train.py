@@ -1,7 +1,6 @@
 import numpy as np
 import tensorflow as tf
 import os
-os.chdir('E:\\Deep-Express-master')
 from scipy.io import wavfile
 from text import *
 from parameters import params as pm
