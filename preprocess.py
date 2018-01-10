@@ -8,7 +8,7 @@ from parameters import params as pm
 
 def get_wav(sound_file):
     sr, wave_data  = wavfile.read(os.path.join(wav_folder, sound_file), mmap=False)
-    wave_data = np.array(wave_data)
+    wave_data = np.array(wave_data)/10000
     if len(wave_data)>= pm.sr * pm.max_duration:
         wave_data = wave_data[:pm.sr * pm.max_duration]
     else:
