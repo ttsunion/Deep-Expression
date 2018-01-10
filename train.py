@@ -85,7 +85,7 @@ net = tf.transpose(net, [0, 2, 1])
 w8 = tf.truncated_normal((pm.Tx, pm.Ty), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w8')
 net = [tf.matmul(net[i, :, :], w8) for i in range(pm.batch_size)]
 yhat = tf.stack(net)
-loss = tf.reduce_mean(tf.abs(y - net), name = 'loss')
+loss = tf.reduce_mean(tf.abs(y - yhat), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
