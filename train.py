@@ -4,7 +4,7 @@ import os
 from scipy.io import wavfile
 from text import *
 from parameters import params as pm
-
+import matplotlib.pyplot as plt
 def normalize(inputs, 
               epsilon = 1e-8):
     inputs_shape = inputs.get_shape()
@@ -15,10 +15,10 @@ def normalize(inputs,
     normalized = (inputs - mean) / ( (variance + epsilon) ** (.5) )
     outputs = gamma * normalized + beta     
     return outputs
+
 def feed_forward(inputs, w):
     outputs = [tf.matmul(inputs[i, :, :], w) for i in range(pm.batch_size)]
     outputs = tf.stack(outputs)
-    outputs = tf.nn.relu(outputs)
     return outputs
 
 def positional_encoding(inputs,
@@ -53,47 +53,52 @@ y = tf.placeholder("float32", [pm.batch_size, pm.Dy, pm.Ty], name = "y")
 lookup_table = tf.Variable(tf.random_uniform((pm.vocab_size, pm.num_units), minval=-0.5, maxval=0.5,dtype=tf.float32), name = 'lookup_table')
 x_embed = tf.nn.embedding_lookup(lookup_table, x, name = 'x_embed')
 x_embed += positional_encoding(x, pm.num_units)
-w1 = tf.truncated_normal((3, pm.num_units, pm.num_units), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name='w1')
-Q = tf.nn.relu(tf.scan(lambda a, x: tf.matmul(x, w1[0, :, :]), x_embed), name = 'Q')
-K = tf.nn.relu(tf.scan(lambda a, x: tf.matmul(x, w1[1, :, :]), x_embed), name = 'K')
-V = tf.nn.relu(tf.scan(lambda a, x: tf.matmul(x, w1[2, :, :]), x_embed), name = 'V')
+w1 = tf.truncated_normal((3, pm.num_units, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None, name='w1')
+Q = feed_forward(x_embed, w1[0, :, :])
+K = feed_forward(x_embed, w1[1, :, :])
+V = feed_forward(x_embed, w1[2, :, :])
 net = tf.matmul(Q, tf.transpose(K, [0, 2, 1]))
 net = tf.matmul(net, V)
 net += x_embed
 net = normalize(net)
-w2 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w2')
-w3 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w3')
-w4 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w4')
-w5 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w5')
-w6 = tf.tile(tf.truncated_normal((1, pm.num_filters), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w6')
-net = feed_forward(net, w2)
-net = normalize(net)
-net = feed_forward(net, w3)
-net = normalize(net)
-net = feed_forward(net, w4)
-net = normalize(net)
-net = feed_forward(net, w5)
-net = normalize(net)
-net = feed_forward(net, w6)
-net = normalize(net)
-w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None), [pm.num_filters, 1], name = 'w7')
-net = [tf.matmul(net[i, :, :], w7) for i in range(pm.batch_size)]
-net = tf.stack(net)
+w2 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w2')
+w3 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w3')
+w4 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w4')
+w5 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w5')
+w6 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w6')
+net += feed_forward(net, w2)
 net = tf.nn.relu(net)
 net = normalize(net)
+net += feed_forward(net, w3)
+net = tf.nn.relu(net)
+net = normalize(net)
+net += feed_forward(net, w4)
+net = tf.nn.relu(net)
+net = normalize(net)
+net += feed_forward(net, w5)
+net = tf.nn.relu(net)
+net = normalize(net)
+net += feed_forward(net, w6)
+net = tf.nn.relu(net)
+net = normalize(net)
+w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w7')
+net = feed_forward(net, w7)
+net = normalize(net)
 net = tf.transpose(net, [0, 2, 1])
-w8 = tf.truncated_normal((pm.Tx, pm.Ty), mean=0.0, stddev=1.0, dtype=tf.float32, seed=None, name = 'w8')
-net = [tf.matmul(net[i, :, :], w8) for i in range(pm.batch_size)]
-yhat = tf.stack(net)
+w8 = tf.truncated_normal((pm.Tx, pm.Ty), mean=0.0, stddev=1000.0, dtype=tf.float32, seed=None, name = 'w8')
+yhat = feed_forward(net, w8)
 loss = tf.reduce_mean(tf.abs(y - yhat), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(2000):
+    for i in range(500):
         _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
-        print('loss:	', sess.run(loss, feed_dict = {x:labels, y:wavs}))
+        print('Step: ', i, 'loss: ', sess.run(loss, feed_dict = {x:labels, y:wavs}))
         if i % 100 == 0:
-            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs}) * 2**10
+            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs})
             ypred = ypred[0, :, :]
-            ypred = ypred.reshape(int(pm.sr * pm.max_duration), 1)
-            wavfile.write('output.wav', pm.sr, ypred)
+            ypred = ypred.reshape(1, -1)[0]
+            ypred = ypred.astype(np.int16)
+            wavfile.write('output.wav', 16000, ypred)
+plt.plot(ypred)
+plt.show()
