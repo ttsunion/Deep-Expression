@@ -15,7 +15,7 @@ class params:
     num_filters = 2048
     step_size = 4
     # training scheme
-    lr = 0.005
+    lr = 0.5
     batch_size = 4
     num_units = 512
     logdir = "logdir"
