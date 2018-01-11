@@ -99,7 +99,7 @@ net = normalize(net)
 net = tf.transpose(net, [0, 2, 1])
 
 yhat = tf.layers.dense(net, pm.Ty)
-loss = tf.reduce_mean(tf.abs(y - yhat), name = 'loss')
+loss = tf.reduce_mean(tf.square(y - yhat), name = 'loss')
 optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 
 with tf.Session() as sess:
