@@ -18,7 +18,7 @@ python preprocess.py
 python train.py
 
 # Progress
-It's works!!!
+It's works!!! But, some noise still exist, and I'm try my best to improve the performance of Deep-Express.
 
 # Meanings of this project
 1. First time to use DNN-only model to synthesis speech
