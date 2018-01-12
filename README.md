@@ -21,7 +21,7 @@ python train.py
 It's works!!! But, some noise still exist, and I'm try my best to improve the performance of Deep-Express.
 
 # Meanings of this project
-1. First time to use DNN-only model to synthesis speech
+1. First time to use DNN-based model to synthesis speech
 2. First time to use chars-signals end to end method, also first time not to use mfcc in speech synthesis piplines.
 3. First time to sythesis very good speech not to hurt the sound rhythm.
 4. First end to end speech synthesis framework that don't need post process.
