@@ -28,7 +28,7 @@ It's works!!! But, some noise still exist, and I'm try my best to improve the pe
 4. Till now, Deep-Express is the most fast end-to-end model in speech synthesis area.
 
 # How to contact me?
-If you have any questions or suggestions or ideas about Deep-Express, please let me know. 
+If you have any questions or suggestions or ideas about Deep-Express, please let me know. Besides, if Deep-Express could help you in some cases, leave a star.
 
 My Email:
 
