@@ -9,7 +9,7 @@ Therefore, I wanna to open up Deep Express framework, to synthesis audio signals
 
 In previous frameworks, people tended to normalized wave data, and may eventually loss of sound rhythm. In Deep Express, I am planning to training my model using 16 bit intergers directly.
 
-This project is under development...............
+This project is under revisement...............
 
 # Step1
 python preprocess.py
@@ -19,3 +19,10 @@ python train.py
 
 # Progress
 It's works!!!
+
+# Meanings of this project
+1. First time to use DNN-only model to synthesis speech
+2. First time to use chars-signals end to end method, also first time not to use mfcc in speech synthesis piplines.
+3. First time to sythesis very good speech not to hurt the sound rhythm.
+4. First end to end speech synthesis framework that don't need post process.
+4. Till now, Deep-Express is the most fast end-to-end model in speech synthesis area.
