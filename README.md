@@ -25,7 +25,8 @@ It's works!!! But, some noise still exist, and I'm try my best to improve the pe
 2. First time to use chars-signals end to end method, also first time not to use mfcc in speech synthesis piplines.
 3. First time to sythesis very good speech not to hurt the sound rhythm.
 4. First end to end speech synthesis framework that don't need post process.
-4. Till now, Deep-Express is the most fast end-to-end model in speech synthesis area.
+5. Till now, Deep-Express is the most fast end-to-end model in speech synthesis area.
+6. A new algorithm (weight-share DNN) was introduced in this project. 
 
 # How to contact me?
 If you have any questions or suggestions or ideas about Deep-Express, please let me know. Besides, if Deep-Express could help you in some cases, leave a star.
