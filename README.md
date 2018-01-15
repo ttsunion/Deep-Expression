@@ -29,7 +29,7 @@ It's works!!! But, some noise still exist, and I'm try my best to improve the pe
 3. First time to sythesis very good speech not to hurt the sound rhythm.
 4. First end to end speech synthesis framework that don't need post process.
 5. Till now, Deep-Express is the most fast end-to-end model in speech synthesis area.
-6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w') was introduced in this project. 
+6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 # How to contact me?
 If you have any questions or suggestions or ideas about Deep-Express, please let me know. Besides, if Deep-Express could help you in some cases, leave a star.
