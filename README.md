@@ -6,7 +6,7 @@ Till now, all piplines in speech synthesis area are not really end to end. No ma
 Because
 
 1. None of them gave up traditional audio preprocessing, like MFCC. But I was always wandering why can't we get kernals of MFCC through backpropagation?                                   
-2. All piplines in speech synthesis area before Deep-Express need to lots of preprocess in text encodeing and speech preprocessing and post processing.
+2. All piplines in speech synthesis area before Deep-Express need lots of preprocessing in text encoding and speech preprocessing and post processing.
 
 Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
 
