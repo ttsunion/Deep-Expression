@@ -8,7 +8,7 @@ Because
 1. None of them gave up traditional audio preprocessing, like MFCC. But I was always wandering why can't we get kernals of MFCC through backpropagation?                                   
 2. All piplines in speech synthesis area before Deep-Express need lots of preprocessing in text encoding and speech preprocessing and post processing.
 
-For example, WaveNet require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017, https://arxiv.org/pdf/1712.05884.pdf); Tacotron (Yuxuan Wang et al., 2017,  https://arxiv.org/pdf/1711.00520.pdf) and Deep Voice 3 (Wei Ping et al., 2017, https://arxiv.org/pdf/1710.07654.pdf) uses the method1 (Griffin-Lim algorithm) and method2 (Griffin-Lim and WORLD and WaveNet algorithms) as vocoder for final audio synthesis. 
+For example, WaveNet (A. van den Oord et al., 2016, https://arxiv.org/pdf/1609.03499.pdf) require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017, https://arxiv.org/pdf/1712.05884.pdf); Both Tacotron (Yuxuan Wang et al., 2017,  https://arxiv.org/pdf/1711.00520.pdf) and Tacotron 2 (Jonathan Shen et al., 2017, https://arxiv.org/pdf/1712.05884.pdf) and Deep Voice 3 (Wei Ping et al., 2017, https://arxiv.org/pdf/1710.07654.pdf) use vocoder (Griffin-Lim or WORLD or WaveNet algorithms) for final audio synthesis. 
 
 Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
 
