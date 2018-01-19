@@ -5,7 +5,7 @@ Before Deep Express, none of piplines in speech synthesis area is really end to 
 
 Because
 
-1. None of them gave up traditional audio domain knowledge, like voice framing, STFT, MFCC, etc.. But I was always wandering why can't we get kernals of MFCC through backpropagation?                                   
+1. None of them gave up traditional audio domain knowledges, like voice framing, STFT, MFCC, etc.. But I was always wandering for example, why can't we get kernals of MFCC through backpropagation?                                   
 2. All piplines in speech synthesis area before Deep-Express need lots of preprocessing in text encoding and speech preprocessing and post processing.
 
 For instance, WaveNet (Aaron van den Oord et al., 2016) require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017). Both Tacotron (Yuxuan Wang et al., 2017) and Tacotron 2 (Jonathan Shen et al., 2017) and Deep Voice 3 (Wei Ping et al., 2017) use vocoder (Griffin-Lim or WORLD or WaveNet algorithms) for final audio synthesis. 
