@@ -114,7 +114,7 @@ optimizer = tf.train.AdamOptimizer(learning_rate=lr, beta1=0.9, beta2=0.9, epsil
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(2000):
+    for i in range(20000):
         _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
         print('Step: ', i, 'loss: ', sess.run(loss, feed_dict = {x:labels, y:wavs}))
     ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs})
