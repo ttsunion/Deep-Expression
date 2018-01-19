@@ -114,16 +114,16 @@ optimizer = tf.train.AdamOptimizer(learning_rate = pm.lr).minimize(loss)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
         for i in range(20000):
-        _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
-        lss = sess.run(loss, feed_dict = {x:labels, y:wavs})
-        print('Step: ', i, 'loss: ', lss)
-        if lss<20:
-            ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs})
-            ypred = ypred[0, :, :]
-            ypred = ypred.reshape(1, -1)[0]
-            ypred = ypred.astype(np.int16)
-            wavfile.write('output.wav', 16000, ypred)
-            break
+            _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
+            lss = sess.run(loss, feed_dict = {x:labels, y:wavs})
+            print('Step: ', i, 'loss: ', lss)
+            if lss<20:
+                ypred = sess.run(yhat, feed_dict = {x:labels, y:wavs})
+                ypred = ypred[0, :, :]
+                ypred = ypred.reshape(1, -1)[0]
+                ypred = ypred.astype(np.int16)
+                wavfile.write('output.wav', 16000, ypred)
+                break
     '''
     for i in range(2000):
         _ = sess.run(optimizer, feed_dict = {x:labels, y:wavs})
