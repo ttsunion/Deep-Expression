@@ -12,9 +12,7 @@ For instance, WaveNet (A. van den Oord et al., 2016, https://arxiv.org/pdf/1609.
 
 Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
 
-In previous frameworks, people tended to normalized wave data, and may eventually loss of sound rhythm. In Deep Express, I am planning to training my model using 16 bit intergers directly.
-
-This project is under revisement...............
+In previous frameworks, people tended to normalized wave data, and may eventually loss of sound rhythm. In Deep Express, model was trained by using 16bit-interger signals directly.
 
 # Step1
 python preprocess.py
@@ -23,7 +21,7 @@ python preprocess.py
 python train.py
 
 # Progress
-It's works!!! But, some noise still exist, and I'm try my best to improve the performance of Deep-Express.
+It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Express. This project is under revisement.
 
 # Meanings of this project
 1. First time to use DNN-based model to synthesis speech
@@ -34,7 +32,7 @@ It's works!!! But, some noise still exist, and I'm try my best to improve the pe
 6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 # How to contact me?
-If you have any questions or suggestions or ideas about Deep-Express, please let me know. Besides, if Deep-Express could help you in some cases, leave a star.
+If you have any questions or suggestions or ideas about Deep-Express, please let me know. Besides, if Deep-Express could help you in some cases, leave a star. Moreover, if you have job opportunity in speech synthesis.....
 
 My Email:
 
