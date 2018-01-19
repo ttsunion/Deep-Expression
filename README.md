@@ -8,11 +8,11 @@ Because
 1. None of them gave up traditional audio preprocessing, like MFCC. But I was always wandering why can't we get kernals of MFCC through backpropagation?                                   
 2. All piplines in speech synthesis area before Deep-Express need lots of preprocessing in text encoding and speech preprocessing and post processing.
 
-For instance, WaveNet (A. van den Oord et al., 2016, https://arxiv.org/pdf/1609.03499.pdf) require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017, https://arxiv.org/pdf/1712.05884.pdf). Both Tacotron (Yuxuan Wang et al., 2017,  https://arxiv.org/pdf/1711.00520.pdf) and Tacotron 2 (Jonathan Shen et al., 2017, https://arxiv.org/pdf/1712.05884.pdf) and Deep Voice 3 (Wei Ping et al., 2017, https://arxiv.org/pdf/1710.07654.pdf) use vocoder (Griffin-Lim or WORLD or WaveNet algorithms) for final audio synthesis. 
+For instance, WaveNet (Aaron van den Oord et al., 2016) require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017). Both Tacotron (Yuxuan Wang et al., 2017) and Tacotron 2 (Jonathan Shen et al., 2017) and Deep Voice 3 (Wei Ping et al., 2017) use vocoder (Griffin-Lim or WORLD or WaveNet algorithms) for final audio synthesis. 
 
 Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
 
-In previous frameworks, people tended to normalized wave data, and may eventually loss of sound rhythm. In Deep Express, model was trained by using 16bit-interger signals directly.
+In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. In Deep Express, model was trained by using 16bit-interger signals directly.
 
 # Step1
 python preprocess.py
@@ -47,3 +47,11 @@ https://github.com/ttsunion/Deep-Express
 
 # Acknowledgement
 Layer-normalization and positional encoding function were copied from Kyubyong directly (https://github.com/Kyubyong/transformer). The remaining codes were all hard-coded myself.
+
+# References
+1 Aaron van den Oord et al., 2016, WAVENET: A GENERATIVE MODEL FOR RAW AUDIO, https://arxiv.org/pdf/1609.03499.pdf
+2 Jonathan Shen et al., 2017, NATURAL TTS SYNTHESIS BY CONDITIONING WAVENET ON MEL SPECTROGRAM
+PREDICTIONS, https://arxiv.org/pdf/1712.05884.pdf
+3 Yuxuan Wang et al., 2017, TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS, https://arxiv.org/pdf/1703.10135.pdf
+Speech Synthesis, https://arxiv.org/pdf/1711.00520.pdf
+3 Wei Ping et al., 2017, DEEP VOICE 3: 2000-SPEAKER NEURAL TEXT-TO-SPEECH, https://arxiv.org/pdf/1710.07654.pdf
