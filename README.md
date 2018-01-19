@@ -12,7 +12,7 @@ For instance, WaveNet (Aaron van den Oord et al., 2016) require significant doma
 
 Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
 
-In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. In Deep Express, model was trained by using 16bit-interger signals directly.
+In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. Even though they claimed that they synthesized natural human voice, synthesized audios from their systems, there is still a gap with real vocals. In Deep Express, model was trained by using 16bit-interger signals directly to synthesize amazing real human voice.
 
 # Step1
 python preprocess.py
