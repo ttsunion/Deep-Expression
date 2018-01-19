@@ -1,7 +1,7 @@
-# Deep Express
+# Why Deep Express
 An Attention Based Open-Source End to End Speech Synthesis Framework, No CNN, No RNN, No MFCC!!!
 
-Till now, all piplines in speech synthesis area are not really end to end. No mattter Deep voice or Tacotron claimed by baidu or google company, and so forth.                                                                                                                      
+Before Deep Express, none of piplines in speech synthesis area is really end to end solution. No mattter Deep voice or Tacotron claimed by baidu or google company, and so forth.                                                                                                                      
 
 Because
 
