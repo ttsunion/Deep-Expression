@@ -56,4 +56,4 @@ PREDICTIONS, https://arxiv.org/pdf/1712.05884.pdf
 
 3 Yuxuan Wang et al., 2017, TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS, https://arxiv.org/pdf/1703.10135.pdf
 
-3 Wei Ping et al., 2017, DEEP VOICE 3: 2000-SPEAKER NEURAL TEXT-TO-SPEECH, https://arxiv.org/pdf/1710.07654.pdf
+4 Wei Ping et al., 2017, DEEP VOICE 3: 2000-SPEAKER NEURAL TEXT-TO-SPEECH, https://arxiv.org/pdf/1710.07654.pdf
