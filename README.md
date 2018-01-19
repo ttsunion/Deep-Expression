@@ -44,3 +44,6 @@ fangshuming@gig.ac.cn
 If you publish work based on Deep Express, please cite:
 
 https://github.com/ttsunion/Deep-Express
+
+# Acknowledgement
+Layer-normalization and positional encoding function were copied from Kyubyong directly (https://github.com/Kyubyong/transformer). The remaining codes were all hard-coded myself.
