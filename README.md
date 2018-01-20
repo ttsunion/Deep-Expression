@@ -49,11 +49,11 @@ https://github.com/ttsunion/Deep-Express
 Layer-normalization and positional encoding function were copied from Kyubyong directly (https://github.com/Kyubyong/transformer). The remaining codes were all hard-coded myself.
 
 # References
-1 Aaron van den Oord et al., 2016, WAVENET: A GENERATIVE MODEL FOR RAW AUDIO, https://arxiv.org/pdf/1609.03499.pdf
+1. Aaron van den Oord et al., 2016, WAVENET: A GENERATIVE MODEL FOR RAW AUDIO, https://arxiv.org/pdf/1609.03499.pdf
 
-2 Jonathan Shen et al., 2017, NATURAL TTS SYNTHESIS BY CONDITIONING WAVENET ON MEL SPECTROGRAM
+2. Jonathan Shen et al., 2017, NATURAL TTS SYNTHESIS BY CONDITIONING WAVENET ON MEL SPECTROGRAM
 PREDICTIONS, https://arxiv.org/pdf/1712.05884.pdf
 
-3 Yuxuan Wang et al., 2017, TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS, https://arxiv.org/pdf/1703.10135.pdf
+3. Yuxuan Wang et al., 2017, TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS, https://arxiv.org/pdf/1703.10135.pdf
 
-4 Wei Ping et al., 2017, DEEP VOICE 3: 2000-SPEAKER NEURAL TEXT-TO-SPEECH, https://arxiv.org/pdf/1710.07654.pdf
+4. Wei Ping et al., 2017, DEEP VOICE 3: 2000-SPEAKER NEURAL TEXT-TO-SPEECH, https://arxiv.org/pdf/1710.07654.pdf
