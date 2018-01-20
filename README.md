@@ -38,8 +38,6 @@ My Email:
 
 fangshuming519@gmail.com
 
-fangshuming@gig.ac.cn
-
 # Citation
 If you publish work based on Deep Express, please cite:
 
