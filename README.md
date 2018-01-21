@@ -1,7 +1,7 @@
-# Why Deep Express
+# Why Deep Expresssion
 An Attention Based Open-Source End to End Speech Synthesis Framework, No CNN, No RNN, No MFCC!!!
 
-Before Deep Express, none of piplines in speech synthesis area is really end to end solution. No mattter Deep voice or Tacotron claimed by baidu or google company, and so forth.                                                                                                                      
+Before Deep Expresssion, none of piplines in speech synthesis area is really end to end solution. No mattter Deep voice or Tacotron claimed by baidu or google company, and so forth.                                                                                                                      
 
 Because
 
@@ -21,7 +21,7 @@ python preprocess.py
 python train.py
 
 # Progress
-It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Express. This project is under revisement.
+It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Expression. This project is under revisement.
 
 # Meanings of this project
 1. First time to use DNN-based model to synthesis speech
@@ -32,16 +32,16 @@ It works well!!! However, some noises still exist, and I'm try my best to improv
 6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 # How to contact me?
-If you have any questions or suggestions or ideas about Deep-Express, please feel free to contact me. Besides, if Deep-Express could help you in some cases, leave a star. 
+If you have any questions or suggestions or ideas about Deep-Express, please feel free to contact me. Besides, if Deep Expression could help you in some cases, leave a star. 
 
 My Email:
 
 fangshuming519@gmail.com
 
 # Citation
-If you publish work based on Deep Express, please cite:
+If you publish work based on Deep Expression, please cite:
 
-https://github.com/ttsunion/Deep-Express
+https://github.com/ttsunion/Deep-Expression
 
 # Acknowledgement
 Layer-normalization and positional encoding function were copied from Kyubyong directly (https://github.com/Kyubyong/transformer). The remaining codes were all hard-coded myself.
