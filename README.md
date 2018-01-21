@@ -32,7 +32,7 @@ It works well!!! However, some noises still exist, and I'm try my best to improv
 6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 # How to contact me?
-If you have any questions or suggestions or ideas about Deep-Express, please feel free to contact me. Besides, if Deep Expression could help you in some cases, leave a star. 
+If you have any questions or suggestions or ideas about Deep-Expression, please feel free to contact me. Besides, if Deep Expression could help you in some cases, leave a star. 
 
 My Email:
 
