@@ -14,6 +14,13 @@ Therefore, I wanna to open up Deep Express framework, to synthesis audio signals
 
 In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. Even though they claimed that they synthesized natural human voice, synthesized audios from their systems, there is still a gap with real vocals. In Deep Express, model was trained by using 16bit-interger signals directly to synthesize amazing real human voice.
 
+# Library Utilized
+python == 3.6.1
+numpy == 1.12.1
+tensorflow == 1.3.0
+scipy == 0.19.0
+
+
 # Step1
 python preprocess.py
 
