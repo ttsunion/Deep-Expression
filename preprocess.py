@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# fangshuming519@gmail.com
 # /usr/bin/python3
 import os
 from scipy.io import wavfile
