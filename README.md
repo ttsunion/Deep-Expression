@@ -10,7 +10,7 @@ Because
 
 For instance, WaveNet (Aaron van den Oord et al., 2016) require significant domain expertise to produce, involving elaborate text-analysis systems as well as a robust lexicon (Jonathan Shen et al., 2017). Both Tacotron (Yuxuan Wang et al., 2017) and Tacotron 2 (Jonathan Shen et al., 2017) and Deep Voice 3 (Wei Ping et al., 2017) use vocoder (Griffin-Lim or WORLD or WaveNet algorithms) for final audio synthesis. 
 
-Therefore, I wanna to open up Deep Express framework, to synthesis audio signals from text directly.  
+Therefore, I wanna to try to open up Deep Expression framework, to synthesis audio signals from text directly.  
 
 In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. Even though they claimed that they synthesized natural human voice, synthesized audios from their systems, there is still a gap with real vocals. In Deep Express, model was trained by using 16bit-interger signals directly to synthesize amazing real human voice.
 
@@ -32,7 +32,7 @@ python preprocess.py
 python train.py
 
 # Progress
-It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Expression. This project is under revisement.
+It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Expression. This project is under revisement. Besides, this pipline is in demo stage.
 
 # Meanings of this project
 1. First time to use DNN-based model to synthesis speech
