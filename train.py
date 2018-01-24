@@ -63,6 +63,7 @@ net = tf.matmul(net, V1)
 net = tf.nn.relu(net)
 net += V1
 net = normalize(net)
+'''
 w2 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w2')
 w3 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w3')
 w4 = tf.tile(tf.truncated_normal((pm.step_size, pm.num_units), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(pm.num_units/pm.step_size), 1], name = 'w4')
@@ -95,6 +96,7 @@ net = normalize(net)
 net += feed_forward(net, w6)
 net = tf.nn.relu(net)
 net = normalize(net)
+'''
 w7 = tf.tile(tf.truncated_normal((1, pm.Dy,), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [pm.num_units, 1], name = 'w7')
 net = feed_forward(net, w7)
 net = tf.nn.relu(net)
