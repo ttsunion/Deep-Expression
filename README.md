@@ -31,8 +31,6 @@ python preprocess.py
 # Step2
 python train.py
 
-# Result
-original sample: ![alt audio]https://raw.githubusercontent.com/ttsunion/Deep-Expression/blob/master/samples/wavs/sample2.wav
 # Progress
 It works well!!! This project is under revisement. Besides, this pipline is in demo stage.
 
