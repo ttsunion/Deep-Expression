@@ -32,7 +32,7 @@ python preprocess.py
 python train.py
 
 # Progress
-It works well!!! However, some noises still exist, and I'm try my best to improve the performance of Deep-Expression. This project is under revisement. Besides, this pipline is in demo stage.
+It works well!!! This project is under revisement. Besides, this pipline is in demo stage.
 
 # Meanings of this project
 1. First time to use DNN-based model to synthesis speech
