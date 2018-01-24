@@ -12,7 +12,7 @@ For instance, WaveNet (Aaron van den Oord et al., 2016) require significant doma
 
 Therefore, I wanna to try to open up Deep Expression framework, to synthesis audio signals from text directly.  
 
-In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. Even though they claimed that they synthesized natural human voice, synthesized audios from their systems, there is still a gap with real vocals. In Deep Express, model was trained by using 16bit-interger signals directly to synthesize amazing real human voice.
+In previous frameworks (Aaron van den Oord et al., 2016; Jonathan Shen et al., 2017; Yuxuan Wang et al., 2017; Wei Ping et al., 2017), people tended to normalized audio data, and may eventually loss of sound rhythm. Even though they claimed that they synthesized natural human voice, synthesized audios from their systems, there is still a gap with real vocals. In Deep Expression, model was trained by using 16bit-interger signals directly to synthesize amazing real human voice.
 
 # Library Utilized
 
@@ -39,7 +39,7 @@ It works well!!! This project is under revisement. Besides, this pipline is in d
 2. First time to use chars-signals end to end method, also first time not to use mfcc in speech synthesis piplines.
 3. First time to sythesis very good speech not to hurt the sound rhythm.
 4. First end to end speech synthesis framework that don't need post process.
-5. Till now, Deep Express is the most fast end-to-end model in speech synthesis area.
+5. Till now, Deep Expression is the most fast end-to-end model in speech synthesis area.
 6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 
