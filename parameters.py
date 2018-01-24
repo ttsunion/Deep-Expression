@@ -9,7 +9,7 @@ class params:
     max_duration = 10.0 # seconds
     Tx = 20 # characters. maximum length of text.
     vocab_size = 48 # unique chars in dictionary
-    frame_length = 0.05 # seconds
+    frame_length = 0.2 # seconds
     Ty = int(sr * frame_length) # signals. maximum length  of signal.
     Dy = int(sr * max_duration/Ty)
     num_filters = 2048
