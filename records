@@ -1,4 +1,5 @@
 #processing LJSpeech-1.0 metadata
-1.line 5936 replace “sponge,” to "sponge"
-2.line 5965 replace “crater”  to "crater"
-3.line 5975 replace “bolting” to "bolting"
+1.line 5936 replace [“sponge”] to ["sponge"]
+2.line 5965 replace [“crater”]  to ["crater"]
+3.line 5975 replace [“bolting”] to ["bolting"]
+4.line 6040 replace [hours’] to [hours']
