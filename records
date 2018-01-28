@@ -1,4 +1,4 @@
-#processing LJSpeech-1.0 metadata
+#processing LJSpeech-1.0 metadata.csv
 1.line 5936 replace “sponge” to "sponge"
 2.line 5965 replace “crater”  to "crater"
 3.line 5975 replace “bolting” to "bolting"
