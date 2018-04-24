@@ -43,7 +43,7 @@ It works well!!! This project is under revisement. Besides, this pipline is in d
 6. A new algorithm, weight-share DNN, (w = tf.tile(tf.truncated_normal((step_size, D), mean=0.0, stddev=1, dtype=tf.float32, seed=None), [int(D/step_size), 1], name = 'w')) was introduced in this project. 
 
 # Piplines
-![picture](https://github.com/ttsunion/Deep-Expression/blob/master/picture1.png)
+![picture](https://github.com/ttsunion/Deep-Expression/blob/master/architecture.png)
 
 # Citation
 If you publish work based on Deep Expression, please cite:
